@@ -2,7 +2,7 @@
 name: tweet-cli
 description: Post tweets, replies, and quotes to X/Twitter using the official API v2. Use this instead of bird for posting. Uses API credits so only post when explicitly asked or scheduled.
 homepage: https://github.com/0xmythril/tweet-cli
-metadata: {"openclaw":{"emoji":"📮","requires":{"bins":["tweet-cli"]},"install":[{"id":"npm","kind":"shell","command":"npm install -g github:0xmythril/tweet-cli","bins":["tweet-cli"],"label":"Install tweet-cli (npm)"}]}}
+metadata: {"openclaw":{"emoji":"📮","requires":{"bins":["tweet-cli"],"env":["X_API_KEY","X_API_SECRET","X_ACCESS_TOKEN","X_ACCESS_TOKEN_SECRET"]},"install":[{"id":"npm","kind":"shell","command":"npm install -g github:0xmythril/tweet-cli#v1.0.0","bins":["tweet-cli"],"label":"Install tweet-cli v1.0.0 (npm)"}]}}
 ---
 
 # tweet-cli
@@ -13,11 +13,16 @@ For **reading** tweets, searching, and browsing timelines, use `bird` instead (n
 
 ## Setup
 
-1. Install: `npm install -g github:0xmythril/tweet-cli`
+1. Install (pinned to release tag):
+```bash
+npm install -g github:0xmythril/tweet-cli#v1.0.0
+```
 2. Get API keys from https://developer.x.com/en/portal/dashboard (Free tier works)
-3. Configure credentials:
+3. Configure credentials (file is created with restricted permissions):
 ```bash
 mkdir -p ~/.config/tweet-cli
+touch ~/.config/tweet-cli/.env
+chmod 600 ~/.config/tweet-cli/.env
 cat > ~/.config/tweet-cli/.env << 'EOF'
 X_API_KEY=your_consumer_key
 X_API_SECRET=your_secret_key
@@ -26,6 +31,14 @@ X_ACCESS_TOKEN_SECRET=your_access_token_secret
 EOF
 ```
 4. Verify: `tweet-cli whoami`
+
+## Security
+
+- **Credentials**: Stored in `~/.config/tweet-cli/.env` (read by `dotenv` at runtime). Set `chmod 600` to restrict access.
+- **No postinstall scripts**: The package has zero install scripts — verify via `npm pack --dry-run` or inspect `package.json`.
+- **No telemetry or network calls** except to the official X API (`api.x.com`) when you run a command.
+- **Pinned install**: The install command pins to a specific release tag. Audit the source at https://github.com/0xmythril/tweet-cli before installing.
+- **Dependencies**: Only 3 runtime deps — `twitter-api-v2` (official X API client), `commander` (CLI parsing), `dotenv` (env file loading). No transitive dependencies.
 
 ## Commands
 
