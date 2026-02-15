@@ -1,0 +1,39 @@
+{
+  "name": "tweet-cli",
+  "version": "1.0.0",
+  "description": "A lightweight CLI for posting to X/Twitter using the official API v2.",
+  "type": "module",
+  "bin": {
+    "tweet-cli": "./bin/tweet-cli.mjs"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    ".env.example",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "twitter",
+    "x",
+    "cli",
+    "tweet",
+    "api-v2",
+    "social-media"
+  ],
+  "author": "0xmythril",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xmythril/tweet-cli.git"
+  },
+  "homepage": "https://github.com/0xmythril/tweet-cli",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "commander": "^13.1.0",
+    "dotenv": "^16.4.7",
+    "twitter-api-v2": "^1.19.0"
+  }
+}
